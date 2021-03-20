@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sense Hat Messaging</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='static/styles.css'>
+    <script src='main.js'></script>
+    <style>
+      body{
+        text-align: center;
+        color: brown;
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>SenseHat</h1>
+
+<br>
+<br>
+<!--
+  <input style="width: 155px;" id="txt" type="text" value="" placeholder="message">
+  <a type="button" id="search" href="/runSH?show=" onclick="addCode()" > [ Show ]</a>
+-->
+
+<form action = "/show" method = "POST"> 
+  <input style="width: 155px;" id="show" name="show" type="text" value="" placeholder="Message">
+  <input type="submit" value="Show"> 
+</form> 
+
+ <!--
+  <br>
+  <br>
+  
+
+  <input style="width: 155px;" id="txt2" type="text" value="" placeholder="image url">
+  <a id="search2" href="/runImg?show=" onclick="addCode2()" > [ Show ]</a>
+ -->
+ 
+  <br>
+  <br>
+  <br>
+
+  <form action = "/logs"> 
+    <input type="submit" value=" Logged Messages "> 
+  </form> 
+  <br>
+  <br>
+  <form action = "/reset"> 
+    <input type="submit" value=" Reset Logs "> 
+  </form> 
+
+    <script type="text/javascript">
+      function addCode() {
+        val = document.getElementById("txt").value; 
+        document.getElementById("search").href = "/runSH?show=" + val;
+        } 
+      function addCode2() {
+        val = document.getElementById("txt2").value; 
+        document.getElementById("search2").href = "/runImg?show=" + val2;
+        } 
+     </script>
+</body>
+</html>
