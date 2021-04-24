@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sense Hat Messaging</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='static/styles.css'>
+    <script src='main.js'></script>
+    <style>
+      body{
+        text-align: center;
+        color: brown;
+        }
+
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+body{
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-family: 'Roboto', sans-serif;
+}
+section{
+  margin: 50px;
+}
+
+    </style>
+
+</head>
+<body>
+
+<div>
+
+<h1>SenseHat</h1>
+
+<br>
+<br>
+<!--
+  <input style="width: 155px;" id="txt" type="text" value="" placeholder="message">
+  <a type="button" id="search" href="/runSH?show=" onclick="addCode()" > [ Show ]</a>
+-->
+
+<form action = "/show" method = "POST"> 
+  <input style="width: 155px;" id="show" name="name" type="text" value="" placeholder="Name">
+  <input style="width: 155px;" id="show" name="show" type="text" value="" placeholder="Message">
+  <input type="submit" value="Show"> 
+</form> 
+
+ <!--
+  <br>
+  <br>
+  
+
+  <input style="width: 155px;" id="txt2" type="text" value="" placeholder="image url">
+  <a id="search2" href="/runImg?show=" onclick="addCode2()" > [ Show ]</a>
+ -->
+ 
+  <br>
+  <br>
+  <br>
+  <form action = "/logs"> 
+    <input type="submit" value=" Show Logged Messages "> 
+  </form> 
+  <br>
+
+    <input onclick="showorhide()" type="submit" value=" View Messages "> 
+
+  <div id="table" style="display: none;">
+    <section>
+      <h1>Messages</h1>
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Messages</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <div id="table">
+            <tr>
+              <td>Unknown</td>
+              <td>Hi</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>Joseph</td>
+              <td>Stop.</td>
+              <td>Blue</td>
+            </tr>
+          </div>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    </div>
+  </div> 
+  <br>
+
+  <form action = "/reset"> 
+    <input type="submit" value=" Reset Logs "> 
+  </form> 
+
+  <br>
+  <br>
+
+  </div>
+
+    <script type="text/javascript">
+    i = 0
+      function addCode() {
+        val = document.getElementById("txt").value; 
+        document.getElementById("search").href = "/runSH?show=" + val;
+        } 
+      function addCode2() {
+        val = document.getElementById("txt2").value; 
+        document.getElementById("search2").href = "/runImg?show=" + val2;
+        } 
+        function showorhide() {
+          if (i % 2 != 0){document.getElementById("table").style.display = "none";}else{document.getElementById("table").style.display = "block"; }
+          i++
+        } 
+
+        var mytable = "<div id='table'>";
+        for (var CELL of {{names|tojson}}) {  mytable += "<tr><td>" + CELL + "</td></tr>"; }
+        mytable += "</div>";
+        document.getElementById("table").innerHTML = mytable;
+
+      $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+      }).resize();
+
+     </script>
+</body>
+</html>
